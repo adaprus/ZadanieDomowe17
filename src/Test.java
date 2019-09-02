@@ -1,34 +1,27 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Test {
     public static void main(String[] args) {
-
-        try {
-            Season season = getSeason();
-            System.out.println(Arrays.toString(season.getMonths()));
-        } catch (NullPointerException e) {
-            System.out.println("Wprowadź poprawną porę roku");
-        }
-    }
-
-    private static Season getSeason() {
-        String seasonName = null;
+        Scanner scanner = new Scanner(System.in);
+        String seasonName;
         Season season = null;
         Season[] seasons = Season.values();
+        System.out.println("Podaj porę roku w języku polskim");
+        seasonName = scanner.nextLine();
+        List<Season> seasonList = new ArrayList<>();
+        Collections.addAll(seasonList, seasons);
 
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Podaj porę roku");
-            seasonName = scanner.nextLine();
-            season = Season.valueOf(seasonName);
-        } catch (IllegalArgumentException e) {
-            for (Season s : seasons) {
-                if (s.getName().equalsIgnoreCase(seasonName)) {
-                    season = s;
-                }
+        for(Season s : seasonList){
+            if(s.getName().equalsIgnoreCase(seasonName)){
+                season = s;
             }
         }
-        return season;
+
+        if(seasonList.contains(season)) {
+            System.out.println(Arrays.toString(season.getMonths()));
+        } else {
+            System.out.println("Nie ma takiej pory roku");
+        }
     }
 }
 

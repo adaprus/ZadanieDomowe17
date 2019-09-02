@@ -7,7 +7,7 @@ public enum Season {
     private final String name;
     private final String[] months;
 
-    Season(String name, String[] months) {
+    private Season(String name, String[] months) {
         this.name = name;
         this.months = months;
     }
